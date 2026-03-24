@@ -21,8 +21,8 @@ export function mapMealDetails(apiItem: MealApi): MealDetails {
     category: apiItem.strCategory,
     area: apiItem.strArea,
     instructions: apiItem.strInstructions,
-    ingredients,
     image: apiItem.strMealThumb,
     youtube: apiItem.strYoutube,
+    ingredients,
   }
 }
