@@ -1,7 +1,8 @@
 import { Route, Routes } from "react-router"
-import Home from "./pages/home/Home"
-import MealsPage from "./pages/meals/MealsPage"
-import AppLayout from "./components/layout/AppLayout"
+import Home from "@/pages/home/Home"
+import MealsPage from "@/pages/meals/MealsPage"
+import AppLayout from "@/components/layout/AppLayout"
+import MealDetailsPage from "./pages/meals/MealDetailsPage"
 
 function App() {
   return (
@@ -9,6 +10,7 @@ function App() {
       <Route element={<AppLayout />}>
         <Route index element={<Home />} />
         <Route path="meals" element={<MealsPage />} />
+        <Route path="meals/:id" element={<MealDetailsPage />} />
       </Route>
     </Routes>
   )
