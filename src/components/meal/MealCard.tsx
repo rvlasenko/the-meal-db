@@ -7,12 +7,12 @@ type Props = {
 
 export default function MealCard({ meal }: Props) {
   return (
-    <Link to={`/meals/${meal.idMeal}`}>
+    <Link to={`/meals/${meal.id}`}>
       <li>
-        <img src={meal.strMealThumb} alt={meal.strMeal} width={120} />
-        <div>{meal.strMeal}</div>
-        <div>{meal.strCategory}</div>
-        <div>{meal.strArea}</div>
+        <img src={meal.image} alt={meal.name} width={120} />
+        <div>{meal.name}</div>
+        <div>{meal.category}</div>
+        <div>{meal.area}</div>
       </li>
     </Link>
   )

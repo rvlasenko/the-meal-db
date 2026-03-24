@@ -43,7 +43,7 @@ export default function MealsPage() {
 
       <ul>
         {meals.map((meal) => (
-          <MealCard key={meal.idMeal} meal={meal} />
+          <MealCard key={meal.id} meal={meal} />
         ))}
       </ul>
     </section>

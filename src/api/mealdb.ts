@@ -1,4 +1,6 @@
-import type { MealApi, MealListItem } from "@/types/meal"
+import type { MealApi, MealDetails, MealListItem } from "@/types/meal"
+import { mapMealListItem } from "./mappers/mapMealListItem"
+import { mapMealDetails } from "./mappers/mapMealDetails"
 
 type MealsResponse = {
   meals: MealApi[] | null
@@ -11,20 +13,22 @@ export async function searchMeals(query: string): Promise<MealListItem[]> {
     BASE_URL + "search.php?s=" + encodeURIComponent(query),
   )
   if (!response.ok) {
-    throw new Error("Meals URL is broken")
+    throw new Error("Search URL is broken")
   }
   const data: MealsResponse = await response.json()
-  return data.meals ?? [] // instead of null
+  const meals = data.meals ?? [] // instead of null
+  return meals.map(mapMealListItem)
 }
 
-export async function getMealById(id: string): Promise<MealApi> {
+export async function getMealById(id: string): Promise<MealDetails> {
   const response = await fetch(BASE_URL + "lookup.php?i=" + id)
   if (!response.ok) {
-    throw new Error("Detailed meal URL is broken")
+    throw new Error("Detail URL is broken")
   }
   const data: MealsResponse = await response.json()
-  if (!data.meals?.[0]) {
+  const meal = data.meals?.[0]
+  if (!meal) {
     throw new Error("Detailed meal does not exist")
   }
-  return data.meals[0]
+  return mapMealDetails(meal)
 }

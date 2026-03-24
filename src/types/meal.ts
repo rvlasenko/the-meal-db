@@ -49,7 +49,26 @@ export type MealApi = {
   strMeasure20: string | null
 }
 
-export type MealListItem = Pick<
-  MealApi,
-  "idMeal" | "strMealThumb" | "strMeal" | "strCategory" | "strArea"
->
+export type MealListItem = {
+  id: string
+  name: string
+  category: string
+  area: string
+  image: string
+}
+
+export type Ingredient = {
+  name: string
+  measure: string
+}
+
+export type MealDetails = {
+  id: string
+  name: string
+  category: string
+  area: string
+  instructions: string
+  image: string
+  ingredients: Ingredient[]
+  youtube: string | null
+}
