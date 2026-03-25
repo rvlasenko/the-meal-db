@@ -6,7 +6,7 @@ type Props = {
   action?: React.ReactNode
 }
 
-export default function MealCard({ meal, action }: Props) {
+export default function MealListCard({ meal, action }: Props) {
   return (
     <li>
       <Link to={`/meals/${meal.id}`}>

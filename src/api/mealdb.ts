@@ -20,6 +20,19 @@ export async function searchMeals(query: string): Promise<MealListItem[]> {
   return meals.map(mapMealListItem)
 }
 
+export async function getRandomMeal(): Promise<MealDetails> {
+  const response = await fetch(BASE_URL + "random.php")
+  if (!response.ok) {
+    throw new Error("Random URL is broken")
+  }
+  const data: MealsResponse = await response.json()
+  const meal = data.meals?.[0]
+  if (!meal) {
+    throw new Error("Detailed meal does not exist")
+  }
+  return mapMealDetails(meal)
+}
+
 export async function getMealById(id: string): Promise<MealDetails> {
   const response = await fetch(BASE_URL + "lookup.php?i=" + id)
   if (!response.ok) {

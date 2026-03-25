@@ -1,4 +1,4 @@
-import MealCard from "@/components/meal/MealCard"
+import MealListCard from "@/components/meal/MealListCard"
 import EmptyState from "@/components/ui/EmptyState"
 import { useFavorites } from "@/hooks/useFavorites"
 
@@ -12,7 +12,7 @@ export default function FavoritesPage() {
       <div>your favorite meals</div>
       <ul>
         {favorites.map((meal) => (
-          <MealCard
+          <MealListCard
             key={meal.id}
             meal={meal}
             action={<button onClick={() => toggle(meal)}>Remove</button>}

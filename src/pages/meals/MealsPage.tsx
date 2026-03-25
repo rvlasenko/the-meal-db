@@ -4,7 +4,7 @@ import { searchMeals } from "@/api/mealdb"
 import Loader from "@/components/ui/Loader"
 import ErrorState from "@/components/ui/ErrorState"
 import EmptyState from "@/components/ui/EmptyState"
-import MealCard from "@/components/meal/MealCard"
+import MealListCard from "@/components/meal/MealListCard"
 import SearchForm from "@/components/search/SearchForm"
 
 export default function MealsPage() {
@@ -43,7 +43,7 @@ export default function MealsPage() {
 
       <ul>
         {meals.map((meal) => (
-          <MealCard key={meal.id} meal={meal} />
+          <MealListCard key={meal.id} meal={meal} />
         ))}
       </ul>
     </section>
