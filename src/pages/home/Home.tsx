@@ -1,4 +1,5 @@
 import Hero from "@/components/home/Hero"
+import LatestViewedSection from "@/components/home/LatestViewedSection"
 import RandomMealSection from "@/components/home/RandomMealSection"
 
 export default function Home() {
@@ -6,6 +7,7 @@ export default function Home() {
     <>
       <Hero />
       <RandomMealSection />
+      <LatestViewedSection />
     </>
   )
 }

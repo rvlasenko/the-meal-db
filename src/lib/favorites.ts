@@ -7,7 +7,7 @@ export function getFavorites(): MealListItem[] {
   if (!raw) return []
 
   try {
-    return JSON.parse(raw)
+    return JSON.parse(raw) // implement zod
   } catch {
     return []
   }

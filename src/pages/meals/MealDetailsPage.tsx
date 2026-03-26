@@ -1,15 +1,18 @@
+import { mapMealDetailsToListItem } from "@/api/mappers/mapMealDetailsToListItem"
 import { getMealById } from "@/api/mealdb"
 import EmptyState from "@/components/ui/EmptyState"
 import ErrorState from "@/components/ui/ErrorState"
 import Loader from "@/components/ui/Loader"
 import { useFavorites } from "@/hooks/useFavorites"
-import type { MealListItem } from "@/types/meal"
+import { useRecentMeals } from "@/hooks/useRecentMeals"
 import { useQuery } from "@tanstack/react-query"
+import { useEffect } from "react"
 import { useParams } from "react-router"
 
 export default function MealDetailsPage() {
   const { id = "" } = useParams()
   const { isFavorite, toggle } = useFavorites()
+  const { add } = useRecentMeals()
 
   const {
     isPending,
@@ -21,6 +24,11 @@ export default function MealDetailsPage() {
     queryFn: () => getMealById(id),
     enabled: Boolean(id),
   })
+
+  useEffect(() => {
+    if (!meal) return // guard clause
+    add(mapMealDetailsToListItem(meal))
+  }, [meal])
 
   if (!id) return <EmptyState message="Meal id is missing" />
 
@@ -36,13 +44,7 @@ export default function MealDetailsPage() {
   if (!meal) return <EmptyState message="No meal found" />
 
   const favorite = isFavorite(meal.id)
-  const favoriteItem: MealListItem = {
-    id: meal.id,
-    name: meal.name,
-    category: meal.category,
-    area: meal.area,
-    image: meal.image,
-  }
+  const listItem = mapMealDetailsToListItem(meal)
 
   return (
     <section>
@@ -59,7 +61,7 @@ export default function MealDetailsPage() {
         ))}
       </ul>
 
-      <button onClick={() => toggle(favoriteItem)}>
+      <button onClick={() => toggle(listItem)}>
         {favorite ? "Remove from favorites" : "Add to favorites"}
       </button>
     </section>
