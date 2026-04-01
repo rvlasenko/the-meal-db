@@ -1,4 +1,5 @@
-import type { MealApi, MealListItem } from "@/types/meal"
+import type { MealListItem } from "@/types/meal"
+import type { MealApi } from "../types"
 
 export function mapMealListItem(apiItem: MealApi): MealListItem {
   return {

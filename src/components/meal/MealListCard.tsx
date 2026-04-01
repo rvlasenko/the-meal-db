@@ -12,8 +12,8 @@ export default function MealListCard({ meal, action }: Props) {
       <Link to={`/meals/${meal.id}`}>
         <img src={meal.image} alt={meal.name} width={120} />
         <div>{meal.name}</div>
-        <div>{meal.category}</div>
-        <div>{meal.area}</div>
+        {meal.category && <div>{meal.category}</div>}
+        {meal.area && <div>{meal.area}</div>}
       </Link>
       {action}
     </li>

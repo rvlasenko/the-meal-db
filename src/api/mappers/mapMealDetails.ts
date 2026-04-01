@@ -1,4 +1,5 @@
-import type { Ingredient, MealApi, MealDetails } from "@/types/meal"
+import type { Ingredient, MealDetails } from "@/types/meal"
+import type { MealApi } from "../types"
 
 export function mapMealDetails(apiItem: MealApi): MealDetails {
   const ingredients: Ingredient[] = []

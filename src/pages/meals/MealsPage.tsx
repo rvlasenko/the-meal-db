@@ -10,6 +10,7 @@ import SearchForm from "@/components/search/SearchForm"
 export default function MealsPage() {
   const [searchParams] = useSearchParams()
   const query = searchParams.get("query")?.trim() ?? ""
+  const category = searchParams.get("category")?.trim() ?? ""
 
   const {
     isPending,
