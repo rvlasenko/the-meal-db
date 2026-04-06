@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query"
 import { useSearchParams } from "react-router"
-import { searchMeals } from "@/api/mealdb"
+import { getMealsByCategory, searchMeals } from "@/api/mealdb"
 import Loader from "@/components/ui/Loader"
 import ErrorState from "@/components/ui/ErrorState"
 import EmptyState from "@/components/ui/EmptyState"
@@ -12,18 +12,27 @@ export default function MealsPage() {
   const query = searchParams.get("query")?.trim() ?? ""
   const category = searchParams.get("category")?.trim() ?? ""
 
+  const hasQuery = Boolean(query)
+  const hasCategory = Boolean(category)
+  const source = hasQuery ? "query" : hasCategory ? "category" : null // query wins if category
+
+  const queryKey = ["meals", source, source === "query" ? query : category]
+  const queryFn = () => {
+    if (source === "query") return searchMeals(query)
+    if (source === "category") return getMealsByCategory(category)
+    return Promise.resolve([])
+  }
+
   const {
+    data: meals,
     isPending,
     isError,
     error,
-    data: meals,
   } = useQuery({
-    queryKey: ["meals", "search", query], // it's better when there will be categories, details
-    queryFn: () => searchMeals(query),
-    enabled: Boolean(query), // it's better to add this check to prevent empty query
+    queryKey,
+    queryFn,
+    enabled: hasQuery || hasCategory, // it's better to add this check to prevent empty query
   })
-
-  if (!query) return <EmptyState message="Enter a search query" />
 
   if (isPending) return <Loader />
 
@@ -38,9 +47,13 @@ export default function MealsPage() {
 
   return (
     <section>
-      <h1>Search results for: {query}</h1>
+      <h1>
+        {source === "query"
+          ? `Search results for: ${query}`
+          : `Category: ${category}`}
+      </h1>
 
-      <SearchForm initialValue={query} />
+      <SearchForm initialValue={source === "query" ? query : ""} />
 
       <ul>
         {meals.map((meal) => (

@@ -15,6 +15,7 @@ export default function SearchForm({ initialValue = "" }: Props) {
 
   const handleSubmit = (e: React.SubmitEvent) => {
     e.preventDefault()
+    if (!query.trim()) return
     navigate(`/meals?query=${query}`)
   }
 

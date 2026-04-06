@@ -64,6 +64,18 @@ export default function MealDetailsPage() {
       <button onClick={() => toggle(listItem)}>
         {favorite ? "Remove from favorites" : "Add to favorites"}
       </button>
+
+      {meal.youtube && (
+        <div>
+          <iframe
+            width="560"
+            height="315"
+            src={meal.youtube.replace("watch?v=", "embed/")}
+            title={meal.name}
+            allowFullScreen
+          />
+        </div>
+      )}
     </section>
   )
 }
