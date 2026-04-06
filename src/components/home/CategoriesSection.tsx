@@ -24,19 +24,28 @@ export default function CategoriesSection() {
       />
     )
 
-  if (!categories) return null // empty section
+  if (!categories) return null
 
   return (
-    <section>
-      <h2>Categories</h2>
+    <section className="py-12 px-6">
+      <div className="mx-auto max-w-6xl">
+        <h2 className="mb-6 text-2xl font-bold text-gray-800">
+          🗂️ Browse by Category
+        </h2>
 
-      <ul>
-        {categories.map((category) => (
-          <li key={category.name}>
-            <Link to={`/meals?category=${category.name}`}>{category.name}</Link>
-          </li>
-        ))}
-      </ul>
+        <ul className="flex flex-wrap gap-3">
+          {categories.map((category) => (
+            <li key={category.name}>
+              <Link
+                to={`/meals?category=${category.name}`}
+                className="rounded-full border border-orange-200 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:border-orange-400 hover:bg-orange-50 hover:text-orange-600 transition-colors"
+              >
+                {category.name}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </div>
     </section>
   )
 }

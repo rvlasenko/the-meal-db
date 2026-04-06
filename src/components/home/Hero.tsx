@@ -2,7 +2,7 @@ import SearchForm from "../search/SearchForm"
 
 export default function Hero() {
   return (
-    <section className="relative overflow-hidden bg-gradient-to-br from-orange-500 to-amber-400 text-white">
+    <section className="relative overflow-hidden bg-linear-to-br from-orange-500 to-amber-400 text-white">
       <div className="absolute inset-0 opacity-10 bg-[url('https://www.themealdb.com/images/media/meals/adxcbq1619787919.jpg')] bg-cover bg-center" />
 
       <div className="relative mx-auto max-w-3xl px-6 py-20 text-center">

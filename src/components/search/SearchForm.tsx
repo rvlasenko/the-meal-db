@@ -20,9 +20,21 @@ export default function SearchForm({ initialValue = "" }: Props) {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input type="search" name="query" value={query} onChange={handleSearch} />
-      <button>submit</button>
+    <form onSubmit={handleSubmit} className="flex gap-2">
+      <input
+        type="search"
+        name="query"
+        value={query}
+        onChange={handleSearch}
+        placeholder="Search meals, e.g. Pasta, Chicken..."
+        className="flex-1 rounded-xl border border-white/40 bg-white/20 px-4 py-3 text-white placeholder-white/60 outline-none focus:border-white/80 focus:bg-white/30 transition"
+      />
+      <button
+        type="submit"
+        className="rounded-xl bg-white px-6 py-3 font-semibold text-orange-500 shadow hover:bg-orange-50 transition"
+      >
+        Search
+      </button>
     </form>
   )
 }
