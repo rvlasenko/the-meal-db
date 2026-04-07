@@ -14,13 +14,13 @@ export function getRecentMeals(): MealListItem[] {
   }
 }
 
-export function saveRecent(items: MealListItem[]) {
-  localStorage.setItem(KEY, JSON.stringify(items))
-}
-
 export function addRecentMeal(item: MealListItem) {
   const meals = getRecentMeals()
   const filtered = meals.filter((meal) => meal.id !== item.id)
 
   saveRecent([item, ...filtered])
+}
+
+function saveRecent(items: MealListItem[]) {
+  localStorage.setItem(KEY, JSON.stringify(items))
 }
